@@ -149,8 +149,9 @@ class Users
     false
   end
 
+
   def to_s
-    "Mi nombre es #{@usuario}, \n Mi mail: #{@email} \n Mi clave #{@clave} \n Mi rol es: #{self} "
+    " Mi nombre es #{@usuario}, \n Mi mail: #{@email} \n Mi clave #{@clave} \n Mi rol es: #{self.class} "
   end
 
 end 
@@ -189,7 +190,8 @@ class Administrador < Director
   end
 end
 
-Usuario = Lector.new("Facundo", 12345, "facuodone1@gmail.com")
-Doc = Documento.new(Usuario, true)
+Usu = Lector.new("Facundo", 12345, "facuodone1@gmail.com")
+Doc = Documento.new(Usu, true)
 
-puts(" Puede borrar ? #{Doc.puede_ser_borrado_por?(Usuario)}")
+puts(" Puede borrar ? #{Doc.puede_ser_borrado_por?(Usu)}")
+puts (Usu.to_s)

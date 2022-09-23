@@ -86,3 +86,113 @@ def clase_string (palabra)
 end
 
 clase_string("hola a")
+
+=begin
+  12. Escribí una función longitud que dado un arreglo que contenga varios String cualesquiera,
+retorne un nuevo arreglo donde cada elemento es la longitud del String que se encuentra en
+la misma posición del arreglo recibido como parámetro. Por ejemplo:
+
+
+def longitud(arreglo)
+  puts (arreglo.map {| palabra | palabra.size})
+end
+
+longitud(['TTPS', 'Opción', 'Ruby', 'Cursada 2022'])
+# => [4, 6, 4, 12]
+
+=begin
+Escribí una función llamada listar que reciba un Hash y retorne un String con los pares de
+clave/valor formateados en una lista ordenada en texto plano. Por ejemplo:
+
+
+
+def listar(h)
+  h= h.sort_by{|key,value| value}.reverse
+  h.each_with_index {|value,i | puts " #{i +1}: #{value[0]}: #{value[1]}"}.to_s
+end
+
+listar({ perros: 2, gatos: 2, peces: 0, aves: 3 })
+# => "1. perros: 2\n2. gatos: 2\n3. peces: 0\n4. aves: 0"
+
+=begin
+15: Escribí unafunción llamada rot13 que encripte un String recibido como parámetro utilizando
+el algoritmo ROT13. Por ejemplo:
+rot13("¡Bienvenidos a la cursada de TTPS Opción Ruby!")
+# => "¡Ovrairavqbf n yn phefnqn qr GGCF Bcpvóa Ehol!
+
+
+
+def rot13(string)
+  string= string.chars.map {|letra| 
+    case letra
+    when "a".."m", "A".."M" then (letra.ord + 13).chr
+    when "n".."z", "N".."Z" then (letra.ord - 13).chr
+    else letra
+    end
+  }.join
+  puts string
+  
+end
+
+rot13("¡Bienvenidos a la cursada de TTPS Opción Ruby!")
+# => "¡Ovrairavqbf n yn phefnqn qr GGCF Bcpvóa Ehol!
+
+#16, lo mismo pero remplazar el 13 por el parametro nuevo que pasemos
+
+=begin
+
+17: Escribí un script en Ruby que le pida a quien lo ejecute su nombre, el cual ingresará por en‑
+trada estándar (el teclado), y que lo utilice para saludarl@ imprimiendo en pantalla ¡Hola, <
+nombre>!. Por ejemplo:
+$ ruby script.rb
+Por favor, ingresá tu nombre:
+R2-D2
+¡Hola, R2-D2!
+
+#ejercicio17:
+
+puts "hola! cual es tu nombre? "
+
+name= gets
+
+puts "Hola #{name}"
+
+
+18: enviar al script el nombre desde afuera
+
+ARGV.each do |_params|
+  puts "Hola #{_params}"
+end
+
+
+19:
+Implementá las funciones necesarias para que, dado un color expresado en notación RGB, se
+pueda obtener su representación en las notaciones entera y hexadecimal. La notación entera
+se define como red + green * 256 + blue * 256 * 256 y la hexadecimal como el resul‑
+tado de expresar en base 16 el valor de cada color y concatenarlos en orden. Por ejemplo:
+
+
+def notacion_hexadecimal(arreglo)
+  "#" + arreglo.map{|i| format("%02x",i)}.join.upcase
+  # Otra forma --> arreglo.inject("#") {|acc,i| acc += format("%02X",i)}
+end
+
+def notacion_entera(arreglo)
+  arreglo.map.with_index{|elem,index| elem * 256.pow(index)}.sum 
+  # Otra forma --> arrego.each.with_index.inject(0) {|acc,(elem,index)| acc += elem * 256.pow(index)}
+end
+
+notacion_hexadecimal([0, 128, 255])
+# => '#0080FF'
+notacion_entera([0, 128, 255])
+# => 16744448
+
+=end
+
+def Ejercicio21(tope)
+  (1..tope).filter {|i|
+  i.modulo(3).zero? && i.modulo(5).zero?
+  }.sum
+end
+
+puts(Ejercicio21(100))

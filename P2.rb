@@ -190,8 +190,51 @@ class Administrador < Director
   end
 end
 
+=begin
 Usu = Lector.new("Facundo", 12345, "facuodone1@gmail.com")
 Doc = Documento.new(Usu, true)
 
 puts(" Puede borrar ? #{Doc.puede_ser_borrado_por?(Usu)}")
 puts (Usu.to_s)
+=end
+
+module Reverso
+  def di_tcejbo()
+    puts(self.object_id.to_s.reverse)
+  end
+
+  def ssalc()
+    puts (self.class.to_s.reverse)
+  end
+end
+
+class Prueba_mixin
+  include Reverso
+  def initialize()
+    puts("CLASE INICIADA XDXD")
+  end
+end
+
+=begin
+mixin= Prueba_mixin.new
+
+mixin.ssalc
+mixin.di_tcejbo
+=end
+
+module Countable
+
+  def count_invocations_of(sym)
+
+  end
+
+  def invoked?(sym)
+
+  end
+
+  def invoked(sym)
+
+  end
+
+end
+

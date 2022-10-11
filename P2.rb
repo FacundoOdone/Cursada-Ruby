@@ -330,3 +330,96 @@ p true.opposite_2.opposite_2
 # => true
 =end
 
+=begin
+EJERCICIO 15
+Escribí un método da_nil? que reciba un bloque, lo invoque y retorne si el valor de retorno del
+bloque fue nil. Por ejemplo:
+=end
+
+def da_nil?
+  if yield != nil 
+    return false
+  else
+    return true
+  end
+end
+
+=begin
+p (da_nil? { })
+# => true
+p (da_nil? do
+'Algo distinto de nil'
+end)
+# => false
+
+=end
+
+=begin
+EJERCICIO 16
+Implementá un método que reciba como parámetros un Hash y un Proc, y que devuelva un
+nuevo Hash cuyas las claves sean los valores del Hash recibido como parámetro, y cuyos valores
+sean el resultado de invocar el Proc con cada clave del Hash original. Por ejemplo:
+
+=end
+
+def procesar_hash(hash,proc)
+  hash.inject({}){|hash_retorno,(clave,valor)| hash_retorno[valor] =proc.call(clave); hash_retorno}
+end
+
+#
+#hash = { 'clave' => 1, :otra_clave => 'valor' }
+#p procesar_hash(hash, ->(x) { x.to_s.upcase })
+# => { 1 => 'CLAVE', 'valor' => 'OTRA_CLAVE' }
+
+
+=begin 
+EJERCICIO 17
+
+Implementá un método que reciba un número variable de parámetros y un bloque, y que al ser
+invocado ejecute el bloque recibido pasándole todos los parámetros que se recibieron encap‑
+sulando todo esto con captura de excepciones de manera tal que si en la ejecución del bloque
+se produce alguna excepción, proceda de la siguiente forma:
+• Si la excepción es de clase RuntimeError, debe imprimir en pantalla "Hay algo mal
+que no anda bien", y retornar :rt.
+• Si la excepción es de clase NoMethodError, debe imprimir "Y este método?" más el
+mensaje original de la excepción que se produjo, y retornar :nm.
+• Si se produce cualquier otra excepción, debe imprimir en pantalla "Y ahora?", y relanzar
+la excepción que se produjo.
+En caso que la ejecución del bloque sea exitosa, deberá retornar :ok
+
+=end
+
+def ej17(*args)
+  #raise Exception
+  args.each{|arg| yield arg}
+  return :ok
+
+rescue RuntimeError => excepcion
+  p ('Hay algo mal que no anda bien'); return :rt
+
+rescue NoMethodError => excepcion
+  p ('Y este metodo?'); return :nm
+
+rescue Exception => excepcion
+  p ('Y ahora?'); raise excepcion
+end
+
+#puts ej17("a","b","c") { | letra | puts "Letra #{letra}: #{letra.ord} en ascii"}
+
+=begin 
+
+EJERCICIO 18
+
+Escribí un enumerador que calcule la serie de Fibonacci.
+
+=end
+
+fibonacci = Enumerator.new do |caller|
+  i1, i2 = 1, 1
+  loop do
+    caller.yield i1
+    i1, i2 = i2, i1+i2
+  end
+end
+
+6.times { puts fibonacci.next }

@@ -422,4 +422,165 @@ fibonacci = Enumerator.new do |caller|
   end
 end
 
-6.times { puts fibonacci.next }
+#6.times { puts fibonacci.next }
+
+=begin
+
+Ejercicio 19
+
+
+=begin
+
+Los enumerators se pueden concatenar por ejemplo: 
+(1..Float::INFINITY).reject { |i| i.odd? }.map { |i| i*i }.first(5)
+
+Con enumerators normales esta linea de codigo se ejecutara de manera infinita, ya que primero intenta iterar sobre 'reject', luego todo 'map' y por ultimo el 'first'.
+En este caso el 'reject' nunca termina porque itera sobre infinito
+
+Si a esta linea le agregamos 'lazy' la cosa cambia:
+(1..Float::INFINITY).lazy.reject { |i| i.odd? }.map { |i| i*i }.first(5)
+
+Ya que ahora iterara de a un elemento a la vez: hace el 'reject' con el primer elemento,si cumple, ese unico elemento pasa al 'map' y desde ahi al 'first'.
+Luego de todo eso itera el segundo elemento, con esto la linea infinita, ahora solo se repite 10 veces.
+
+=end
+
+=begin  
+
+EJERCICIO 20
+
+Extendé la clase Array con el método randomly que funcione de la siguiente manera:
+• Si recibe un bloque, debe invocar ese bloque con cada uno de los elementos del arreglo
+en orden aleatorio, sin repetir los elementos sobre los que se lo invoca.
+• Si no recibe un bloque, debe devolver un enumerador que va arrojando, de a uno, los ele‑
+mentos del arreglo en orden aleatorio
+
+=end
+
+class Array 
+  def randomly()
+    if block_given? 
+      self.shuffle().each{|el| yield(el) }
+    else
+      self.shuffle().each{|el| p(el)}
+    end
+
+  end
+end
+=begin
+arreglo=['gato','perro','bota','avion']
+arreglo.randomly{|elem| elem= elem.upcase; puts elem}
+arreglo.randomly()
+
+=begin
+
+Ejercicio 21
+
+21. Escribí un enumerador que genere series de números primos con algún tope, ya sea que se de‑
+tenga al alcanzar o superar un valor, o que termine su ejecución al encontrar el enésimo número
+primo
+
+=end
+require 'prime'
+
+def primes(tope)
+  enum = Prime.first tope
+  enum.each do |p|
+      puts p
+  end
+end
+
+#p primes 10
+
+
+=begin
+
+Ejercicio 22
+
+
+Implementá una clase Palabra que funcione de la siguiente manera:
+• La clase se instancia con un argumento obligatorio (un String) que será la palabra que
+represente.
+• Si la palabra que representa contiene caracteres y al menos un espacio, la instanciación
+debe arrojar una excepción NoEsUnaPalabra con el mensaje "<palabra> no es una
+palabra" (donde <palabra> es el valor recibido como argumento en el constructor.
+• Si la palabra que representa es un String vacío ("", " " son dos ejemplos de Strings
+vacíos), debe arrojar una excepción EsUnStringVacio con el mensaje "Es un string
+vacío".
+• La clase debe implementar los siguientes métodos de instancia:
+  – #vocales que debe retornar las vocales que contiene la palabra que representa, sin
+  repeticiones.
+  – #consonantes que debe retornar las consonantes que contiene la palabra, sin repe‑
+  ticiones.
+  – #longitud que debe retornar la cantidad de caracteres que tiene la palabra.
+  – #es_panvocalica? que debe retornar un valor booleano indicando si la palabra es
+  panvocálica (o pentavocálica), es decir si contiene las 5 vocales.
+  – #es_palindroma? que debe retornar un valor boolean indicando si la palabra es un
+  palíndromo, es decir si se lee igual en un sentido que en otro, teniendo al menos 3
+  letras.
+  – #gritando que debe retornar la palabra que representa en mayúsculas.
+  – #en_jaquer que debe retornar la palabra que representa con las vocales cambiadas
+  por números ("a" por "4", "e" por "3", "i" por "1", "o" por "0" y "u" por "2").
+=end
+
+class NoEsUnaPalabra < StandardError
+  def initialize(mensaje)
+      super(mensaje)
+  end
+end 
+
+class EsUnStringVacio < StandardError
+  def initialize(mensaje)
+      super(mensaje)
+  end
+end 
+
+class Palabra
+  attr_accessor :palabra 
+
+  def initialize(palabra)
+      if(false)
+          raise EsUnStringVacio.new("Es un String vacio.")
+      elsif(false)
+          raise NoEsUnaPalabra.new("<#{palabra}> no es una palabra.") 
+      end
+      self.palabra = palabra
+  end
+
+  def vocales
+      return self.palabra.delete("bcdfghjklmnpqrstvwxyz").split("").uniq.sort
+  end
+
+  def consonantes
+      return self.palabra.delete("aeiou").split("").uniq.sort
+  end
+
+  def longitud
+      return self.palabra.length
+  end
+
+  def es_panvocalica?
+      return self.palabra.tr("aeiou","").split("").uniq.length == 5
+  end
+
+  def es_palindrome?
+      return self.palabra == self.palabra.reverse
+  end
+
+  def gritando
+      return self.palabra.upcase
+  end
+
+  def en_jaquer
+      return self.palabra.tr("aeiou","43102")
+  end
+end
+
+p = Palabra.new("neuquen")
+puts "Vocales: #{p.vocales}"
+puts "Consonantes: #{p.consonantes}"
+puts "Longitud: #{p.longitud}"
+puts "Es panvocalica?: #{p.es_panvocalica?}"
+puts "Es palindrome?: #{p.es_palindrome?}"
+puts "Gritando: #{p.gritando}"
+puts "En jaquer: #{p.en_jaquer}"

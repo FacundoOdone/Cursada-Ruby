@@ -69,3 +69,73 @@
     -opcion_4: Ejecuta el rescue cuando itenta hacer nil*3, pero el valor 0 se queda en la posicion del nil, entonces el puts al final muestra: [3, 0, 9, 0, 15, 0, 21, 0, 27, 0]
 =end
 
+
+#---------------------------EJERCICIO 11-----------------------------
+=begin
+      Las gemas de Ruby son paquetes de librerías para Ruby que se instalan en el sistema
+      y quedan listas para ser usadas, con un simple require o con mecanismos que aporta el propio sistema de gemas para Ruby.
+      Todas las gemas tienen como estructura un nombre, una version y una plataforma.
+      Las plataformas estan basadas en la arquitectura del CPU
+=end
+
+## ------------ Ejercicio 12 ------------
+=begin
+    El comando gem se utiliza para instalar gemas "a mano" de a una
+    El comando blunder se utiliza para instalar varias gemas a la vez, utilizando un Gemfile declarado con aterioridad
+=end
+
+
+
+#-------------------------EJERCICIO 13------------------------------
+=begin
+    Las gemas utilizando el comando install, son instaladas en /home/username/ruby/gems
+    Las gemas intaladas utilizando la gema bundler, se alojan en /var/bundle/ruby/2.1.0/gems/rake-10.4.2
+
+=end
+
+
+# ------------ Ejercicio 14 ------------
+=begin
+    El comando gem server inicia un servidor local con la informacion de las gemas
+    Ademas se le pueden añadir opciones al comando para obtener ciertos datos:
+        . -h, --help – Obtener ayuda sobre este comando
+        . -V, --[no-]verbose – Establecer el nivel detallado de salida
+        . -q, --quiet – Medidor de progreso del comando de silencio
+        . --silent – Silenciar la salida de RubyGems
+        . --config-file FILE – Use este archivo de configuración en lugar del predeterminado
+        . --backtrace – Mostrar seguimiento de pila en errores
+        . --debug – Activar la depuración de Ruby
+        . --norc – Evite cargar cualquier archivo .gemrc
+=end
+
+# ------------ Ejercicio 15 ------------
+=begin
+    Como solución a este problema, proponemos un conjunto simple de reglas y requisitos que dictan cómo se asignan e incrementan los números de versión. Estas reglas se basan, pero no necesariamente se limitan a, prácticas comunes generalizadas preexistentes en uso tanto en software de código abierto como cerrado
+    
+    Una version se compone de 3 numeros estos son: MAYOR.MENOR.PARCHE y se deben aumentar cuando:
+    1. Versión PRINCIPAL cuando realiza cambios de API incompatibles
+    2. Versión MENOR cuando agrega funcionalidad de manera compatible con versiones anteriores
+    3. Versión PATCH cuando realiza correcciones de errores compatibles con versiones anteriores
+=end
+
+#------------ Ejercicio 16 ----------
+require 'colorputs'
+
+puts "hola", :rainbow_bl
+
+Bundler.require
+puts "Chau!", :red
+
+#------------ Ejercicio 17--------------
+
+=begin
+      1- La finalidad del archivo gemfile es tener un registro de las gemas que son utilizadas dentro del proyecto
+      2- source indica de donde descargara las gemas que se encuentran en Gemfile.Hasta antes de Bundler 1.13 se podia agregar multiples source pero ya no
+      3- Cuando instale la gema colorputs, automaticamente se instalo la ultima version existente de la gema, si mañana sale una version nueva, debere 
+         instalarla a mano o utilizar el comando "bundler update", el mismo actualiza todas las gemas dentro del archivo "gemfile"
+      4- Salto un error ya que intento buscar un archivo de nombre "colorputs" y como no existe devuelve error
+      5- Cuando se utilizo el comando  "bundle install", la gema bundler instalo todas las gemas dentro de "gemfile"
+      6- bundle install, instala todas las gemas de 0 como si nunca se hubiesen instalado
+         bundle update, actualiza todas las gemas instaladas a su ultima version    
+      7- PAra que funcione de ambas maneras, importaria la gema de manera individual, y dejaria ademas el Bundler.require
+=end

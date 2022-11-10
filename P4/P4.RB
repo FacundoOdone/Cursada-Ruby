@@ -54,7 +54,27 @@ Esto le permite tener múltiples cachés separados de la misma aplicación.
 1 y 2) Un inicializador es cualquier archivo de código Ruby almacenado en /config/initializers en su aplicación. 
 Puede usar inicializadores para mantener los ajustes de configuración que deben realizarse después de cargar todos los marcos y complementos.
 3) No, ya que los initializer son ejecutados cuando se inicia el sistema
-
+4)Practico
 ---------------------------Ejercicio 7------------------------
 1)Ruby proporciona un script llamado Generator. Este script se puede usar para generar muchos elementos útiles en Rails
-2)
+2)El comando para saber que generators estan disponibles es "rails g"
+3)Practico
+--------------------------Ejercicio 8-------------------------
+1) Las rutas se definen en el archivo config/routes.rb.
+    *Cada ruta está compuesta por los siguientes elementos:
+    *El verbo HTTP.
+    *El path.
+    *El controlador y el método (acción) que se van a encargar de procesar la petición que coincida.
+    ej: get '/pages/home', to: 'pages#home'
+
+2)El término lenguaje específico de dominio (DSL) en realidad no está relacionado con Ruby Generalmente se usa para describir un 
+  lenguaje que tiene construcciones adecuadas para expresar conceptos de un dominio particular.
+  Está el concepto de un DSL interno, que utiliza la sintaxis de un idioma existente, un idioma host, como Ruby
+  EJ: respond :resource=>"/hello" do  |request, response|
+        response.body = "<message>hello</message>"
+      end
+3)Practico
+4) Para conocer todas las rutas declaradas, podemos utilizar el comando "rails routes"
+5)Practico
+------------------------Ejercicio 9---------------------------
+
